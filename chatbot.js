@@ -541,7 +541,7 @@
             route: 'general'
         },
         branding: {
-            welcomeText: 'Besoin d\'aide ? Notre chatbot fonctionnant au solaire est là pour vous aider !',
+            welcomeText: 'Besoin d\'aide ?',
         },
         style: {
             primaryColor: '#9C27B0',
