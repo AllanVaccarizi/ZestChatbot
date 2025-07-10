@@ -578,8 +578,8 @@
             welcomeText: 'Besoin d\'aide ?',
         },
         style: {
-            primaryColor: '#6b837b',
-            secondaryColor: '#B19CD9',
+            primaryColor: '#9C27B0',
+            secondaryColor: '#4A90E2',
             position: 'right',
             backgroundColor: '#ffffff',
             fontColor: '#1B1919'
