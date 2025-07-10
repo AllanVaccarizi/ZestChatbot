@@ -316,7 +316,7 @@
             border-radius: 50%;
             background-size: cover;
             background-position: center;
-            background-image: url('https://lightyellow-hornet-990098.hostingersite.com/wp-content/uploads/2025/06/frame_77_1x.webp');
+            background-image: url('https://zest.fr/wp-content/uploads/2025/06/frame_77_1x.webp');
             border: 2px solid var(--chat--color-primary);
         }
 
