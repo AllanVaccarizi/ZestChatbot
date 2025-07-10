@@ -710,25 +710,7 @@
     const toggleButton = document.createElement('button');
     toggleButton.className = `chat-toggle${config.style.position === 'left' ? ' position-left' : ''}`;
     toggleButton.innerHTML = `
-        <div style="
-            width: 20px; 
-            height: 15px; 
-            background: white; 
-            border-radius: 8px; 
-            position: relative;
-            margin: auto;
-        ">
-            <div style="
-                position: absolute;
-                bottom: -3px;
-                left: 3px;
-                width: 0;
-                height: 0;
-                border-left: 4px solid transparent;
-                border-right: 4px solid transparent;
-                border-top: 4px solid white;
-            "></div>
-        </div>
+        <span style="font-size: 24px; color: white; font-weight: bold;">💬</span>
     `;
     
     // Créer le popup "Une question ?"
