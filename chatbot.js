@@ -596,7 +596,6 @@
         "Combien coûte une installation de panneaux solaires ?",
         "Quelle économie vais-je réaliser sur mes factures d'électricité ?",
         "Quelles sont les aides et subventions disponibles pour l'installation ?",
-        "Combien de temps faut-il pour installer les panneaux ?"
     ];
 
     // Merge user config with defaults
