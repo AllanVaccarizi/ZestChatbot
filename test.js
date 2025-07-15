@@ -613,9 +613,10 @@
 
     // Messages pré-rédigés
     const predefinedMessages = [
-        "Combien coûte une installation de panneaux solaires ?",
-        "Quelle économie vais-je réaliser sur mes factures d'électricité ?",
-        "Quelles sont les aides et subventions disponibles pour l'installation ?",
+        "Quels produits conviennent à ma peau sensible ?",
+        "Comment choisir ma routine de soin naturelle ?",
+        "Vos produits sont-ils vraiment 100% biologiques ?",
+        "Avez-vous des coffrets cadeaux disponibles ?"
     ];
 
     // Merge user config with defaults
