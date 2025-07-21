@@ -513,63 +513,10 @@
             font-weight: bold;
         }
 
-        .n8n-chat-widget .chat-popup {
-            position: fixed;
-            bottom: calc(2vh + clamp(50px, 8vw, 60px) + 10px);
-            right: 2vw;
-            background: #DC2626;
-            color: #ffffff;
-            padding: 12px 20px;
-            border-radius: 20px;
-            font-size: clamp(12px, 2.5vw, 14px);
-            font-weight: 600;
-            font-family: 'Montserrat', sans-serif;
-            box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
-            opacity: 0;
-            transform: scale(0) translateX(20px);
-            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            pointer-events: none;
-            z-index: 998;
-            cursor: pointer;
-            max-width: 200px;
-        }
-
-        .n8n-chat-widget .chat-popup.position-left {
-            right: auto;
-            left: 2vw;
-            transform: scale(0) translateX(-20px);
-        }
-
-        .n8n-chat-widget .chat-popup.show {
-            opacity: 1;
-            transform: scale(1) translateX(0);
-            pointer-events: auto;
-        }
-
-        .n8n-chat-widget .chat-popup::after {
-            content: '';
-            position: absolute;
-            bottom: -8px;
-            right: 30px;
-            width: 0;
-            height: 0;
-            border-left: 8px solid transparent;
-            border-right: 8px solid transparent;
-            border-top: 8px solid #DC2626;
-        }
-
-        .n8n-chat-widget .chat-popup.position-left::after {
-            right: auto;
-            left: 30px;
-        }
 
         @keyframes popupBounce {
             0%, 100% { transform: scale(1) translateX(0); }
             50% { transform: scale(1.05) translateX(0); }
-        }
-
-        .n8n-chat-widget .chat-popup.show {
-            animation: popupBounce 2s ease-in-out infinite;
         }
 
         .n8n-chat-widget .chat-message strong {
@@ -640,10 +587,6 @@
             .n8n-chat-widget .chat-toggle.position-left {
                 left: 1vw;
             }
-            
-            .n8n-chat-widget .chat-popup {
-                display: none !important;
-            }
         }
 
         /* Media queries pour très petits écrans */
@@ -683,14 +626,6 @@
                 left: 3vw;
             }
             
-            .n8n-chat-widget .chat-popup {
-                bottom: calc(3vh + 60px + 10px);
-                right: 3vw;
-            }
-            
-            .n8n-chat-widget .chat-popup.position-left {
-                left: 3vw;
-            }
         }
 `;
 
@@ -1070,7 +1005,6 @@
     
     widgetContainer.appendChild(chatContainer);
     widgetContainer.appendChild(toggleButton);
-    widgetContainer.appendChild(chatPopup);
     document.body.appendChild(widgetContainer);
 
     const chatInterface = chatContainer.querySelector('.chat-interface');
@@ -1670,7 +1604,6 @@
             chatContainer.classList.remove('open', 'closing');
             chatContainer.style.display = 'none';
             toggleButton.classList.remove('hidden');
-            handlePopupDisplay();
         }, 300);
     }
     
@@ -1687,7 +1620,6 @@
             chatContainer.classList.add('open');
             chatHasBeenOpened = true;
             localStorage.setItem('chatbot_opened', 'true');
-            chatPopup.classList.remove('show');
             
             setTimeout(() => {
                 // Essayer de restaurer l'historique
@@ -1717,28 +1649,6 @@
             return;
         }
         closeChatbot();
-    });
-
-    function handlePopupDisplay() {
-        if (!chatContainer.classList.contains('open')) {
-            setTimeout(() => {
-                if (!chatContainer.classList.contains('open')) {
-                    chatPopup.classList.add('show');
-                }
-            }, 1000);
-        } else {
-            chatPopup.classList.remove('show');
-        }
-    }
-
-    setTimeout(() => {
-        if (!chatContainer.classList.contains('open')) {
-            handlePopupDisplay();
-        }
-    }, 2000);
-
-    chatPopup.addEventListener('click', () => {
-        toggleButton.click();
     });
 
     window.addEventListener('beforeunload', () => {
