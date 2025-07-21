@@ -1053,18 +1053,15 @@
     toggleButton.className = `chat-toggle${config.style.position === 'left' ? ' position-left' : ''}`;
     toggleButton.innerHTML = `
         <div style="
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            background: white;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 16px;
-            font-weight: bold;
-            color: var(--chat--color-primary);
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        ">?</div>
+            color: white;
+            font-weight: 600;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        ">Chat</div>
     `;
     
     const chatPopup = document.createElement('div');
