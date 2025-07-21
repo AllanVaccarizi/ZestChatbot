@@ -1053,10 +1053,10 @@
     toggleButton.className = `chat-toggle${config.style.position === 'left' ? ' position-left' : ''}`;
     toggleButton.innerHTML = `
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 2C6.48 2 2 6.48 2 12C2 13.54 2.36 15.01 3.01 16.31L2 22L7.69 20.99C8.99 21.64 10.46 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 20C10.74 20 9.52 19.74 8.42 19.26L6 20L6.74 17.58C6.26 16.48 6 15.26 6 14C6 8.48 8.48 6 12 6C15.52 6 18 8.48 18 14C18 17.52 15.52 20 12 20Z" fill="white"/>
-            <circle cx="9" cy="12" r="1" fill="white"/>
-            <circle cx="12" cy="12" r="1" fill="white"/>
-            <circle cx="15" cy="12" r="1" fill="white"/>
+            <path d="M20 2H4C2.9 2 2 2.9 2 4V16C2 17.1 2.9 18 4 18H6L10 22L14 18H20C21.1 18 22 17.1 22 16V4C22 2.9 21.1 2 20 2Z" stroke="white" stroke-width="2" fill="white"/>
+            <circle cx="8" cy="10" r="1.5" fill="currentColor" opacity="0.8"/>
+            <circle cx="12" cy="10" r="1.5" fill="currentColor" opacity="0.8"/>
+            <circle cx="16" cy="10" r="1.5" fill="currentColor" opacity="0.8"/>
         </svg>
     `;
     
