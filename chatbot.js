@@ -691,6 +691,37 @@
             .n8n-chat-widget .chat-popup.position-left {
                 left: 3vw;
             }
+
+            .n8n-chat-widget .chat-icon {
+                display: inline-block;
+                width: 24px;
+                height: 24px;
+                background: white;
+                border-radius: 50%;
+                position: relative;
+            }
+
+            .n8n-chat-widget .chat-icon::before {
+                content: '';
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 16px;
+                height: 16px;
+                background: var(--chat--color-primary);
+                border-radius: 8px 8px 8px 2px;
+            }
+
+            .n8n-chat-widget .chat-icon::after {
+                content: '💬';
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                font-size: 14px;
+                color: white;
+            }
         }
 `;
 
@@ -1051,14 +1082,7 @@
     
     const toggleButton = document.createElement('button');
     toggleButton.className = `chat-toggle${config.style.position === 'left' ? ' position-left' : ''}`;
-    toggleButton.innerHTML = `
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Chat" focusable="false">
-            <path d="M12 2C6.48 2 2 6.48 2 12C2 13.54 2.36 15.01 3.01 16.31L2 22L7.69 20.99C8.99 21.64 10.46 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2Z" fill="white"/>
-            <circle cx="9" cy="12" r="1" fill="#333333" opacity="0.8"/>
-            <circle cx="12" cy="12" r="1" fill="#333333" opacity="0.8"/>
-            <circle cx="15" cy="12" r="1" fill="#333333" opacity="0.8"/>
-        </svg>
-    `;
+    toggleButton.innerHTML = `<span class="chat-icon"></span>`;
     
     const chatPopup = document.createElement('div');
     chatPopup.className = `chat-popup${config.style.position === 'left' ? ' position-left' : ''}`;
