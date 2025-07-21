@@ -1,4 +1,35 @@
 (function() {
+
+    // ============================================
+    // 🎨 CONFIGURATION DU CHATBOT
+    // ============================================
+    
+    // --- COULEURS ET STYLE ---
+    const CHATBOT_COLORS = {
+        primaryColor: '#9C27B0',      // Couleur principale (orange)
+        secondaryColor: '#4A90E2',    // Couleur secondaire (jaune)
+        backgroundColor: '#ffffff',   // Fond du chatbot
+        fontColor: '#1B1919',        // Couleur du texte
+        position: 'right'            // Position: 'left' ou 'right'
+    };
+    
+    // --- AVATAR DU CHATBOT ---
+    const CHATBOT_AVATAR = 'https://zest.fr/wp-content/uploads/2025/06/frame_77_1x.webp';
+    
+    // --- QUESTIONS FRÉQUENTES ---
+    const PREDEFINED_MESSAGES = [
+        "Combien coûte une installation de panneaux solaires ?",
+        "Quelle économie vais-je réaliser sur mes factures d'électricité ?",
+        "Quelles sont les aides et subventions disponibles pour l'installation ?"
+    ];
+    
+    // --- CONFIGURATION WEBHOOK ---
+    const WEBHOOK_CONFIG = {
+        url: window.CHATBOT_WEBHOOK_URL || 'https://n8n.srv749948.hstgr.cloud/webhook/54dcb82e-558a-4188-9ec5-66fe7c775b48/chat',
+        route: 'general'
+    };
+    
+
     // Prevent multiple initializations
     if (window.GrowthAIChatWidgetInitialized) return;
     window.GrowthAIChatWidgetInitialized = true;
@@ -12,10 +43,10 @@
     // Create and inject styles
     const styles = `
         .n8n-chat-widget {
-            --chat--color-primary: var(--n8n-chat-primary-color, #9C27B0);
-            --chat--color-secondary: var(--n8n-chat-secondary-color, #4A90E2);
-            --chat--color-background: var(--n8n-chat-background-color, #ffffff);
-            --chat--color-font: var(--n8n-chat-font-color, #1B1919);
+            --chat--color-primary: var(--n8n-chat-primary-color, ${CHATBOT_COLORS.primaryColor});
+            --chat--color-secondary: var(--n8n-chat-secondary-color, ${CHATBOT_COLORS.secondaryColor});
+            --chat--color-background: var(--n8n-chat-background-color, ${CHATBOT_COLORS.backgroundColor});
+            --chat--color-font: var(--n8n-chat-font-color, ${CHATBOT_COLORS.fontColor});
             font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
         }
         
@@ -348,7 +379,7 @@
             border-radius: 50%;
             background-size: cover;
             background-position: center;
-            background-image: url('https://zest.fr/wp-content/uploads/2025/06/frame_77_1x.webp');
+            background-image: url('${CHATBOT_AVATAR}');
             border: 2px solid var(--chat--color-primary);
         }
 
@@ -670,20 +701,11 @@
 
     // Default configuration
     const defaultConfig = {
-        webhook: {
-            url: window.CHATBOT_WEBHOOK_URL || 'https://n8n.srv749948.hstgr.cloud/webhook/54dcb82e-558a-4188-9ec5-66fe7c775b48/chat',
-            route: 'general'
-        },
+        webhook: WEBHOOK_CONFIG,
         branding: {
             welcomeText: 'Besoin d\'aide ?',
         },
-        style: {
-            primaryColor: '#9C27B0',
-            secondaryColor: '#4A90E2',
-            position: 'right',
-            backgroundColor: '#ffffff',
-            fontColor: '#1B1919'
-        },
+        style: CHATBOT_COLORS,
         security: {
             maxMessageLength: 2000,
             requestTimeout: 60000,
@@ -698,11 +720,7 @@
     };
 
     // Messages pré-rédigés
-    const predefinedMessages = [
-        "Combien coûte une installation de panneaux solaires ?",
-        "Quelle économie vais-je réaliser sur mes factures d'électricité ?",
-        "Quelles sont les aides et subventions disponibles pour l'installation ?",
-    ];
+    const predefinedMessages = PREDEFINED_MESSAGES;
 
     // Merge user config with defaults
     const config = window.GrowthAIChatConfig ? 
