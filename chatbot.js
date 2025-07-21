@@ -691,37 +691,6 @@
             .n8n-chat-widget .chat-popup.position-left {
                 left: 3vw;
             }
-
-            .n8n-chat-widget .chat-icon {
-                display: inline-block;
-                width: 24px;
-                height: 24px;
-                background: white;
-                border-radius: 50%;
-                position: relative;
-            }
-
-            .n8n-chat-widget .chat-icon::before {
-                content: '';
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                width: 16px;
-                height: 16px;
-                background: var(--chat--color-primary);
-                border-radius: 8px 8px 8px 2px;
-            }
-
-            .n8n-chat-widget .chat-icon::after {
-                content: '💬';
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                font-size: 14px;
-                color: white;
-            }
         }
 `;
 
@@ -1082,7 +1051,9 @@
     
     const toggleButton = document.createElement('button');
     toggleButton.className = `chat-toggle${config.style.position === 'left' ? ' position-left' : ''}`;
-    toggleButton.innerHTML = `<span class="chat-icon"></span>`;
+    toggleButton.innerHTML = `
+        <span style="font-size: 26px; color: white; line-height: 1;">💬</span>
+    `;
     
     const chatPopup = document.createElement('div');
     chatPopup.className = `chat-popup${config.style.position === 'left' ? ' position-left' : ''}`;
