@@ -999,9 +999,6 @@
         ">Chat</div>
     `;
     
-    const chatPopup = document.createElement('div');
-    chatPopup.className = `chat-popup${config.style.position === 'left' ? ' position-left' : ''}`;
-    chatPopup.textContent = 'Une question ?';
     
     widgetContainer.appendChild(chatContainer);
     widgetContainer.appendChild(toggleButton);
