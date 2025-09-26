@@ -16,6 +16,13 @@
     // --- AVATAR DU CHATBOT ---
     const CHATBOT_AVATAR = 'https://zest.fr/wp-content/uploads/2025/06/frame_77_1x.webp';
     
+    // --- OUVERTURE AUTOMATIQUE ---
+    // Mettre à false pour désactiver l'ouverture automatique du chat au chargement de la page
+    const AUTO_OPEN_CHAT = false;
+    
+    // Debug: Vérifier la valeur
+    console.log('AUTO_OPEN_CHAT constant:', AUTO_OPEN_CHAT);
+    
     // --- QUESTIONS FRÉQUENTES ---
     const PREDEFINED_MESSAGES = [
         "Combien coûte une installation de panneaux solaires ?",
@@ -651,6 +658,10 @@
             enabled: true,
             maxMessages: 100, // Limite du nombre de messages stockés
             persistDuration: 7 * 24 * 60 * 60 * 1000 // 7 jours en millisecondes
+        },
+        // Nouvelle option pour l'ouverture automatique
+        behavior: {
+            autoOpen: AUTO_OPEN_CHAT // Utilise la variable de configuration
         }
     };
 
@@ -664,8 +675,16 @@
             branding: { ...defaultConfig.branding, ...window.GrowthAIChatConfig.branding },
             style: { ...defaultConfig.style, ...window.GrowthAIChatConfig.style },
             security: { ...defaultConfig.security, ...window.GrowthAIChatConfig.security },
-            history: { ...defaultConfig.history, ...window.GrowthAIChatConfig.history }
+            history: { ...defaultConfig.history, ...window.GrowthAIChatConfig.history },
+            behavior: { ...defaultConfig.behavior, ...window.GrowthAIChatConfig.behavior }
         } : defaultConfig;
+
+    // Debug logs
+    console.log('Final config.behavior.autoOpen:', config.behavior.autoOpen);
+    console.log('External config exists:', !!window.GrowthAIChatConfig);
+    if (window.GrowthAIChatConfig && window.GrowthAIChatConfig.behavior) {
+        console.log('External behavior config:', window.GrowthAIChatConfig.behavior);
+    }
 
     let currentSessionId = '';
     let sessionTimeout = null;
@@ -1029,8 +1048,18 @@
         }
     });
 
-    // Auto-open chatbot seulement si c'est la première visite ET qu'il n'a jamais été fermé
-    if (!chatHasBeenOpened && !chatHasBeenClosed) {
+    // Auto-open chatbot seulement si la configuration l'autorise explicitement
+    console.log('=== DEBUG AUTO-OPEN ===');
+    console.log('AUTO_OPEN_CHAT constant:', AUTO_OPEN_CHAT);
+    console.log('config.behavior.autoOpen:', config.behavior.autoOpen);
+    console.log('chatHasBeenOpened:', chatHasBeenOpened);
+    console.log('chatHasBeenClosed:', chatHasBeenClosed);
+    console.log('localStorage opened:', localStorage.getItem('chatbot_opened'));
+    console.log('localStorage closed:', localStorage.getItem('chatbot_closed'));
+    console.log('Condition will execute?', AUTO_OPEN_CHAT === true && !chatHasBeenOpened && !chatHasBeenClosed);
+
+    if (AUTO_OPEN_CHAT === true && !chatHasBeenOpened && !chatHasBeenClosed) {
+        console.log('Auto-opening chatbot - config.behavior.autoOpen:', config.behavior.autoOpen);
         setTimeout(() => {
             chatContainer.style.display = 'flex';
             void chatContainer.offsetWidth;
@@ -1050,6 +1079,8 @@
                 }
             }, 800);
         }, 500);
+    } else {
+        console.log('Chatbot auto-open disabled - config.behavior.autoOpen:', config.behavior.autoOpen, 'chatHasBeenOpened:', chatHasBeenOpened, 'chatHasBeenClosed:', chatHasBeenClosed);
     }
 
     function generateUUID() {
