@@ -6,31 +6,26 @@
     
     // --- COULEURS ET STYLE ---
     const CHATBOT_COLORS = {
-        primaryColor: '#6b837b',      // Couleur principale (orange)
-        secondaryColor: '#B19CD9',    // Couleur secondaire (jaune)
+        primaryColor: '#9C27B0',      // Couleur principale (orange)
+        secondaryColor: '#4A90E2',    // Couleur secondaire (jaune)
         backgroundColor: '#ffffff',   // Fond du chatbot
         fontColor: '#1B1919',        // Couleur du texte
         position: 'right'            // Position: 'left' ou 'right'
     };
     
     // --- AVATAR DU CHATBOT ---
-    const CHATBOT_AVATAR = 'https://comettecosmetics.com/wp-content/uploads/2025/08/Photo-chatbot.webp';
-    
-    // --- OUVERTURE AUTOMATIQUE ---
-    // Mettre à false pour désactiver l'ouverture automatique du chat au chargement de la page
-    const AUTO_OPEN_CHAT = false;
+    const CHATBOT_AVATAR = 'https://zest.fr/wp-content/uploads/2025/06/frame_77_1x.webp';
     
     // --- QUESTIONS FRÉQUENTES ---
     const PREDEFINED_MESSAGES = [
-        "Quels produits conviennent à ma peau sensible ?",
-        "Comment choisir ma routine de soin naturelle ?",
-        "Vos produits sont-ils vraiment 100% biologiques ?",
-        "Avez-vous des coffrets cadeaux disponibles ?"
+        "Combien coûte une installation de panneaux solaires ?",
+        "Quelle économie vais-je réaliser sur mes factures d'électricité ?",
+        "Quelles sont les aides et subventions disponibles pour l'installation ?"
     ];
     
     // --- CONFIGURATION WEBHOOK ---
     const WEBHOOK_CONFIG = {
-        url: window.CHATBOT_WEBHOOK_URL || 'https://n8n.srv749948.hstgr.cloud/webhook/88707b4f-c9ba-4bd5-b1ae-4eecb628fa9d/chat',
+        url: window.CHATBOT_WEBHOOK_URL || 'https://n8n.srv749948.hstgr.cloud/webhook/54dcb82e-558a-4188-9ec5-66fe7c775b48/chat',
         route: 'general'
     };
     
@@ -656,10 +651,6 @@
             enabled: true,
             maxMessages: 100, // Limite du nombre de messages stockés
             persistDuration: 7 * 24 * 60 * 60 * 1000 // 7 jours en millisecondes
-        },
-        // Nouvelle option pour l'ouverture automatique
-        behavior: {
-            autoOpen: AUTO_OPEN_CHAT // Utilise la variable de configuration
         }
     };
 
@@ -673,8 +664,7 @@
             branding: { ...defaultConfig.branding, ...window.GrowthAIChatConfig.branding },
             style: { ...defaultConfig.style, ...window.GrowthAIChatConfig.style },
             security: { ...defaultConfig.security, ...window.GrowthAIChatConfig.security },
-            history: { ...defaultConfig.history, ...window.GrowthAIChatConfig.history },
-            behavior: { ...defaultConfig.behavior, ...window.GrowthAIChatConfig.behavior }
+            history: { ...defaultConfig.history, ...window.GrowthAIChatConfig.history }
         } : defaultConfig;
 
     let currentSessionId = '';
@@ -997,9 +987,17 @@
     const toggleButton = document.createElement('button');
     toggleButton.className = `chat-toggle${config.style.position === 'left' ? ' position-left' : ''}`;
     toggleButton.innerHTML = `
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-            <path d="M12 2C6.477 2 2 6.477 2 12c0 1.821.487 3.53 1.338 5L2.5 21.5l4.5-.838A9.955 9.955 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2zm0 18c-1.476 0-2.886-.313-4.156-.878l-3.156.586.586-3.156A7.962 7.962 0 014 12c0-4.411 3.589-8 8-8s8 3.589 8 8-3.589 8-8 8z"/>
-        </svg>`;
+        <div style="
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        ">Chat</div>
+    `;
     
     
     widgetContainer.appendChild(chatContainer);
@@ -1031,8 +1029,8 @@
         }
     });
 
-    // Auto-open chatbot seulement si la configuration l'autorise ET si c'est la première visite ET qu'il n'a jamais été fermé
-    if (config.behavior.autoOpen && !chatHasBeenOpened && !chatHasBeenClosed) {
+    // Auto-open chatbot seulement si c'est la première visite ET qu'il n'a jamais été fermé
+    if (!chatHasBeenOpened && !chatHasBeenClosed) {
         setTimeout(() => {
             chatContainer.style.display = 'flex';
             void chatContainer.offsetWidth;
