@@ -20,9 +20,6 @@
     // Mettre à false pour désactiver l'ouverture automatique du chat au chargement de la page
     const AUTO_OPEN_CHAT = false;
     
-    // Debug: Vérifier la valeur
-    console.log('AUTO_OPEN_CHAT constant:', AUTO_OPEN_CHAT);
-    
     // --- QUESTIONS FRÉQUENTES ---
     const PREDEFINED_MESSAGES = [
         "Combien coûte une installation de panneaux solaires ?",
@@ -679,13 +676,6 @@
             behavior: { ...defaultConfig.behavior, ...window.GrowthAIChatConfig.behavior }
         } : defaultConfig;
 
-    // Debug logs
-    console.log('Final config.behavior.autoOpen:', config.behavior.autoOpen);
-    console.log('External config exists:', !!window.GrowthAIChatConfig);
-    if (window.GrowthAIChatConfig && window.GrowthAIChatConfig.behavior) {
-        console.log('External behavior config:', window.GrowthAIChatConfig.behavior);
-    }
-
     let currentSessionId = '';
     let sessionTimeout = null;
 
@@ -1049,17 +1039,7 @@
     });
 
     // Auto-open chatbot seulement si la configuration l'autorise explicitement
-    console.log('=== DEBUG AUTO-OPEN ===');
-    console.log('AUTO_OPEN_CHAT constant:', AUTO_OPEN_CHAT);
-    console.log('config.behavior.autoOpen:', config.behavior.autoOpen);
-    console.log('chatHasBeenOpened:', chatHasBeenOpened);
-    console.log('chatHasBeenClosed:', chatHasBeenClosed);
-    console.log('localStorage opened:', localStorage.getItem('chatbot_opened'));
-    console.log('localStorage closed:', localStorage.getItem('chatbot_closed'));
-    console.log('Condition will execute?', AUTO_OPEN_CHAT === true && !chatHasBeenOpened && !chatHasBeenClosed);
-
     if (AUTO_OPEN_CHAT === true && !chatHasBeenOpened && !chatHasBeenClosed) {
-        console.log('Auto-opening chatbot - config.behavior.autoOpen:', config.behavior.autoOpen);
         setTimeout(() => {
             chatContainer.style.display = 'flex';
             void chatContainer.offsetWidth;
@@ -1079,8 +1059,6 @@
                 }
             }, 800);
         }, 500);
-    } else {
-        console.log('Chatbot auto-open disabled - config.behavior.autoOpen:', config.behavior.autoOpen, 'chatHasBeenOpened:', chatHasBeenOpened, 'chatHasBeenClosed:', chatHasBeenClosed);
     }
 
     function generateUUID() {
